@@ -15,3 +15,7 @@ app.get('/getSeats', (req, res) => {
     let seats = [{ rows: '10', cols: '10' }];
     res.send(seats);
 })
+
+app.post('/setSeats', (req, res) => {
+
+})

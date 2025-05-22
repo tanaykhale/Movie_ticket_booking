@@ -14,8 +14,15 @@ const Home = () => {
              console.error('Error fetching seats:', err);
         });
     },[])
-    const handleClick=()=>{
-
+    const handleClick=(i,j)=>{
+        console.log(i+'   '+j);
+        axios.put('http://localhost:9000/setSeats',[i,j])
+        .then(()=>{
+            console.log("Data is added");
+        })
+        .catch((err)=>{
+            console.log('Error: '+err);
+        })
     }
     return (
         <div>
@@ -30,12 +37,11 @@ const Home = () => {
                         let seatCols = [];
                         for (let j = 0; j < b; j++) {
                             seatCols.push(
-                                <input key={j} type='checkbox'  style={{ margin: 2 }} />
-                                
+                                <input key={j} type='checkbox'  style={{ margin: 2 }}  onClick={()=>handleClick(i,j)}/>
                             );
                         }
                         seatRows.push(
-                            <div key={i}>{seatCols}{i}</div>
+                            <div key={i}>{seatCols}{i+1}</div>
                         );
                     }
                     return <div key={idx}>{seatRows} </div>;
