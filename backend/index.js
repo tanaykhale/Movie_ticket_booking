@@ -3,6 +3,7 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
 app.listen(9000, (err) => {
     if (!err)
@@ -17,5 +18,7 @@ app.get('/getSeats', (req, res) => {
 })
 
 app.post('/setSeats', (req, res) => {
-
+    let a = req.body;
+    console.log(a);
+    res.send({ status: "Seat updated" });
 })
