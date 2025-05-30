@@ -6,7 +6,7 @@ const Home = () => {
     useEffect(()=>{
         axios.get('http://localhost:9000/getSeats')
         .then((res)=>{
-            debugger;
+            
             console.log(res.data);
             setSeats(res.data);
         })
@@ -16,7 +16,7 @@ const Home = () => {
     },[])
     const handleClick=(i,j)=>{
         console.log(i+'   '+j);
-        axios.put('http://localhost:9000/setSeats',[i,j])
+        axios.post('http://localhost:9000/setSeats',{ row: i, col: j })
         .then(()=>{
             console.log("Data is added");
         })
@@ -35,9 +35,10 @@ const Home = () => {
                     let seatRows = [];
                     for (let i = 0; i < a; i++) {
                         let seatCols = [];
+                        let row = String.fromCharCode(65 + i);
                         for (let j = 0; j < b; j++) {
                             seatCols.push(
-                                <input key={j} type='checkbox'  style={{ margin: 2 }}  onClick={()=>handleClick(i,j)}/>
+                                <input key={j} type='checkbox'  style={{ margin: 2 }}  onClick={()=>handleClick(row,j)}/>
                             );
                         }
                         seatRows.push(
